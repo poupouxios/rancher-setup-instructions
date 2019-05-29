@@ -7,7 +7,8 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 ## Setup Cluster and Node ready for deployment
 
 - Run the below command to start Rancher UI
-  - docker run -d --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 8080:80 -p 8443:443  rancher/rancher:latest
+  - `docker run -d --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 8080:80 -p 8443:443  rancher/rancher:latest`
+  
   - The (-v /opt/rancher:/var/lib/rancher) as Rancher mentions `it uses etcd as datastore. When using the Single Node Install, the embedded etcd is being used. The persistent data is at the following path in the container: /var/lib/rancher. You can bind mount a host volume to this location to preserve data on the host it is running on. When using RancherOS, please check what persistent storage directories you can use to store the data.`
 
 - If you are running it on Linux do a `docker inspect <container-name-of-rancher-running>` and go towards the end to find the IP Address.
