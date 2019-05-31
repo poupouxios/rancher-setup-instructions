@@ -7,10 +7,10 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 ## Setup Cluster and Node ready for deployment
 
 - Run the below command to start Rancher UI
-  - docker run -d --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 8080:80 -p 8443:443  rancher/rancher:latest
+  - `docker run -d --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 8080:80 -p 8443:443  rancher/rancher:latest`
   - The (-v /opt/rancher:/var/lib/rancher) as Rancher mentions `it uses etcd as datastore. When using the Single Node Install, the embedded etcd is being used. The persistent data is at the following path in the container: /var/lib/rancher. You can bind mount a host volume to this location to preserve data on the host it is running on. When using RancherOS, please check what persistent storage directories you can use to store the data.`
 
-- If you are running it on Linux do a `docker inspect <container-name-of-rancher-running>` and go towards the end to find the IP Address.
+- If you are running it on Linux do a `docker inspect <container-name-of-rancher-running>` and go towards the end to find the IP Address. Or you can use localhost:8080 for more convenience.
 
 - Set a password for your Rancher along with the URL to access it.
 
@@ -69,22 +69,22 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
     - As a: Cluster IP (internal only)
 
   - Environent Variables: (Click Add Variable and paste the below. Rancher will populate correctly)
-    APP_NAME=Swoole
-    APP_ENV=production
-    APP_KEY=base64:cLvcXoMvzPQ1r5Czjir8fRQ4qwzOYXp2m+AhtJwRsG4=
-    APP_DEBUG=true
-    APP_LOG_LEVEL=debug
-    DB_CONNECTION=mysql
-    DB_HOST=swoole-mysql
-    DB_PORT=3306
-    DB_DATABASE=lumendb
-    DB_USERNAME=lumenuser
-    DB_PASSWORD=test1234!
-    SWOOLE_HTTP_DAEMONIZE=true
-    SWOOLE_HTTP_REACTOR_NUM=4
-    SWOOLE_HTTP_WORKER_NUM=4
-    SWOOLE_HTTP_TASK_WORKER_NUM=4
-    SWOOLE_HOT_RELOAD_ENABLE=true
+    APP_NAME=Swoole  
+    APP_ENV=production  
+    APP_KEY=base64:cLvcXoMvzPQ1r5Czjir8fRQ4qwzOYXp2m+AhtJwRsG4=  
+    APP_DEBUG=true  
+    APP_LOG_LEVEL=debug  
+    DB_CONNECTION=mysql  
+    DB_HOST=swoole-mysql  
+    DB_PORT=3306  
+    DB_DATABASE=lumendb  
+    DB_USERNAME=lumenuser  
+    DB_PASSWORD=test1234!  
+    SWOOLE_HTTP_DAEMONIZE=true  
+    SWOOLE_HTTP_REACTOR_NUM=4  
+    SWOOLE_HTTP_WORKER_NUM=4  
+    SWOOLE_HTTP_TASK_WORKER_NUM=4  
+    SWOOLE_HOT_RELOAD_ENABLE=true  
 
   - Volumes (Select Bind-mount a directory from the node)
     - Volume name: swoole-lumen-storage
@@ -102,10 +102,10 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
   - Docker image: mysql:5.7
 
   - Environment Variables: (Click Add Variable and paste the below. Rancher will populate correctly)
-    MYSQL_USER=lumenuser
-    MYSQL_PASSWORD=test1234!
-    MYSQL_DATABASE=lumendb
-    MYSQL_ROOT_PASSWORD=veryS3cur3P4ssw0rd1234!
+    MYSQL_USER=lumenuser  
+    MYSQL_PASSWORD=test1234!  
+    MYSQL_DATABASE=lumendb  
+    MYSQL_ROOT_PASSWORD=veryS3cur3P4ssw0rd1234!  
 
   - Volumes (Select Bind-mount a directory from the node)
     - Volume name: swoole-mysql-db
@@ -123,13 +123,13 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 
   - Name: swoole-website
 
-  - Specify a hostname to use (we are going to set a custom hostname bounded to the xip.io as we don't have a domain available. If you have a domain, set the exact domain name eg. google.com): swoole.192.168.1.112.xip.io (for more information about to setup a subdomain of xip.io visit the site xip.io)
+  - Specify a hostname to use (we are going to set a custom hostname bounded to the xip.io as we don't have a domain available. If you have a domain, set the exact domain name eg. google.com): swoole.<server-ip>.xip.io (for more information about to setup a subdomain of xip.io visit the site xip.io)
 
   - Target Backend: Press the Service and remove the Workload row from below. Select Target Swoole and Port 80.
 
 - Press Save and wait until the Initializing becomes Active.
 
-- If everything goes well, visit `http://swoole.192.168.1.112.xip.io` and you will see Lumen load on the left showing `Lumen (5.7.7) (Laravel Components 5.7.*)`
+- If everything goes well, visit `http://swoole.<server-ip>.xip.io` and you will see Lumen load on the left showing `Lumen (5.7.7) (Laravel Components 5.7.*)`
 
 - Now the orchestration happens and the `swoole` workload communicates with the `swoole-mysql` workload.
 
@@ -160,3 +160,9 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 ##Extra steps for more familiarization
 
 Now you are ready to orchestrate more applications. You can try now and use the `mcr.microsoft.com/dotnet/core/samples:aspnetapp` image to setup a workload for this and see how an ASP.NET core application runs through container.
+
+##References
+
+- https://rancher.com/docs/rancher/v2.x/en/installation/single-node/
+- https://octoperf.com/blog/2018/06/04/rancher-2-getting-started/
+- https://computingforgeeks.com/how-to-install-and-use-rancher-2-to-manage-containers-on-ubuntu-18-04-lts/
