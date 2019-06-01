@@ -1,4 +1,4 @@
-#Running Rancher 2.x and deploy an image
+# Running Rancher 2.x and deploy an image
 
 This readme will take you step by step to setup Rancher and how you can orchestrate a web application with a database to communicate and work.
 
@@ -37,7 +37,7 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 - When the Node is ready, you can click on it and you will see  CPU and Memory monitoring and how many pods it runs.
 
 
-##Orchestrate containers
+## Orchestrate containers
 
 - Now that we have a Node running, lets setup some containers to run.
 
@@ -134,7 +134,7 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 - Now the orchestration happens and the `swoole` workload communicates with the `swoole-mysql` workload.
 
 
-##Access container logs and shell
+## Access container logs and shell
 
 - Let's say we run this application for the first time and we want to run migrations to the database. Somehow we need access on the codebase to run the migrations.
 
@@ -157,11 +157,11 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 
 - If you do `show tables;` you will see the migrations table there, which indicates that the communication from `swoole` pod to `swoole-mysql` worked.
 
-##Extra steps for more familiarization
+## Extra steps for more familiarization
 
 Now you are ready to orchestrate more applications. You can try now and use the `mcr.microsoft.com/dotnet/core/samples:aspnetapp` image to setup a workload for this and see how an ASP.NET core application runs through container.
 
-##References
+## References
 
 - https://rancher.com/docs/rancher/v2.x/en/installation/single-node/
 - https://octoperf.com/blog/2018/06/04/rancher-2-getting-started/
