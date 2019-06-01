@@ -24,7 +24,7 @@ Before running Rancher 2.x make sure you stop anything that reserves ports 80 an
 
 - Click Next. This will save the Cluster and will show you a screen to create a Node. Node is the server where the actual pods/containers will run.
 
-- For your Master Node, make sure to select the etcd and control pane. For any other Nodes you add, you can leave only the worker ticked.
+- For your Master Node, make sure to select the etcd and control pane. For any other Nodes you add, you can leave only the worker ticked. More about etcd and Controlpane can be found here https://rancher.com/docs/rancher/v2.x/en/cluster-provisioning/.
 
 - Run the command shown on that page to the Node in order to bind it to Rancher.
 
